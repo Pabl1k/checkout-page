@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import Header from '../widgets/Header.vue';
 import FormContainer from '../widgets/FormContainer.vue';
+import Header from '../widgets/Header.vue';
 </script>
 
 <template>
   <Header />
-  <div class="flex justify-center mt-[36px]">
+  <div class="flex justify-center mt-[36px] max-mobile:mt-[18px]">
     <FormContainer />
   </div>
 </template>

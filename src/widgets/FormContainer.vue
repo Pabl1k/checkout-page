@@ -2,6 +2,7 @@
 import { reactive } from 'vue';
 import pin from '../shared/assets/pin.svg';
 import Dropdown from '../shared/ui/Dropdown.vue';
+import ErrorContainer from '../shared/ui/ErrorContainer.vue';
 import FieldWrapper from '../shared/ui/FieldWrapper.vue';
 import Input from '../shared/ui/Input.vue';
 import RadioButton from '../shared/ui/RadioButton.vue';
@@ -77,9 +78,13 @@ function handleChange(key: UserInfoFieldKeys, value: string) {
 
 <!-- change width for mobile -->
 <template>
-  <div class="bg-form-background flex flex-col items-center py-[34px] px-[24px] gap-[34px]">
-    <h1 class="text-form-title font-bold text-xl text-center">Get your Car Insurance for $9.99</h1>
-    <div class="w-[328px]">
+  <div
+    class="bg-form-background flex flex-col items-center max-mobile:py-[22px] max-mobile:px-[20px] py-[34px] px-[24px] gap-[34px] rounded-[4.59px] border border-form-border"
+  >
+    <div class="max-mobile:w-[250px] w-[328px]">
+      <h1 class="text-form-title font-bold text-xl text-center mb-[34px] max-mobile:mb-[14px]">
+        Get your Car Insurance for $9.99
+      </h1>
       <div v-for="field in userInfoInputs" :key="field.key">
         <FieldWrapper :title="field.title">
           <Input
@@ -95,7 +100,7 @@ function handleChange(key: UserInfoFieldKeys, value: string) {
       </div>
 
       <FieldWrapper title="Birth date">
-        <div class="flex gap-1">
+        <div class="flex max-mobile:gap-[5px] gap-[10px]">
           <div
             v-for="{ key, title } in birthDateFields"
             :key="key"
@@ -108,11 +113,7 @@ function handleChange(key: UserInfoFieldKeys, value: string) {
             />
           </div>
         </div>
-        <div class="h-[20px]">
-          <p v-if="formErrors.birthDate" class="text-red-500 text-sm">
-            {{ formErrors.birthDate }}
-          </p>
-        </div>
+        <ErrorContainer :errorMessage="formErrors.birthDate" />
       </FieldWrapper>
 
       <FieldWrapper title="Gender">

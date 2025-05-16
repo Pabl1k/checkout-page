@@ -14,6 +14,7 @@
     --color-submit-button-background: #22C55E;
     
     --color-form-title: #000000;
+    --color-form-border: #F2F2F2;
     --color-field-name: #27272A;
     --color-field-value: #71717A;
     --color-field-border: #D4D4D8;
@@ -22,4 +23,6 @@
     --color-radio-button-text: #2F2F30;
     --color-lock-icon: #7B8091;
     --color-footer-text: #8C8C8F;
+
+    --breakpoint-mobile: 420px;
 }

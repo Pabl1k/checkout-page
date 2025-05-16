@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import clsx from 'clsx';
-import { defineProps } from 'vue';
 
 const props = defineProps<{
   label: string;

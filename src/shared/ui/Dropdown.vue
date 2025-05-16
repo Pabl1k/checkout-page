@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { defineProps } from 'vue';
-import arrowDown from '../assets/arrowDown.svg';
-import arrowUp from '../assets/arrowUp.svg';
+import arrows from '../assets/arrows.svg';
 
 defineProps<{
   value: string;
@@ -22,21 +20,20 @@ function handleChange(event: Event) {
 <template>
   <div class="flex flex-col relative">
     <select
-      class="text-field-value appearance-none bg-form-background border-[1.15px] rounded-[4.59px] border-field-border h-[45px] px-[10px] pr-[36px] text-black"
+      class="text-field-value appearance-none bg-form-background border-[1.15px] rounded-[4.59px] border-field-border max-mobile:h-[40px] h-[45px] px-[10px]"
       :value="value"
       @change="handleChange"
     >
-      <option disabled hidden value="" class="">{{ placeholder }}</option>
+      <option disabled hidden value="">{{ placeholder }}</option>
       <option v-for="option in options" :key="option" :value="option">
         {{ option }}
       </option>
     </select>
 
     <div
-      class="flex flex-col gap-1 absolute right-[12px] top-1/2 transform -translate-y-1/2 pointer-events-none"
+      class="flex flex-col gap-1 absolute right-[5px] top-1/2 transform -translate-y-1/2 pointer-events-none"
     >
-      <img :src="arrowUp" alt="arrow up" class="w-[6px] h-[5.63px]" />
-      <img :src="arrowDown" alt="arrow down" class="w-[6px] h-[5.63px]" />
+      <img :src="arrows" alt="arrows" class="w-[5.48px] h-[12px]" />
     </div>
   </div>
 </template>
