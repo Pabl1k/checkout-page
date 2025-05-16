@@ -18,7 +18,7 @@ function handleChange(event: Event) {
 <template>
   <div class="flex flex-col relative">
     <select
-      class="text-field-value appearance-none bg-form-background border-[1.15px] rounded-[4.59px] border-field-border max-mobile:h-[40px] h-[45px] px-[10px]"
+      class="text-field-value appearance-none bg-form-background border-[1.15px] rounded-[4.59px] border-field-border max-mobile:h-[40px] h-[45px] px-[10px] outline-none"
       :value="value"
       @change="handleChange"
     >

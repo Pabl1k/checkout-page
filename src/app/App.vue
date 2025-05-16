@@ -11,14 +11,12 @@ function goToCheckout() {
 </script>
 
 <template>
-  <div class="font-script bg-main-background h-screen">
+  <div class="font-script bg-main-background">
     <div v-if="currentRoute === CHECKOUT_ROUTE">
       <Checkout />
     </div>
     <div v-else>
-      <p @click="goToCheckout" class="cursor-pointer text-blue-500 underline">
-        Go to checkout
-      </p>
+      <p @click="goToCheckout" class="cursor-pointer text-blue-500 underline">Go to checkout</p>
     </div>
   </div>
 </template>

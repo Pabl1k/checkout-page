@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { reactive, watch } from 'vue';
+import { reactive } from 'vue';
+import CardInformation from '../features/CardInformation.vue';
 import UserInformation from '../features/UserInformation.vue';
 import type { FormErrorKeys, FormState, InputFieldKeys } from '../shared/types/form.ts';
 import type { Gender, UserBirthDateFieldKeys } from '../shared/types/userInfo.ts';
@@ -19,9 +20,7 @@ const formState = reactive<FormState>({
   expirationDate: '',
   cvv: ''
 });
-watch(formState, (newValue) => {
-  console.log('Form state changed:', newValue);
-});
+
 const formErrors = reactive<Record<FormErrorKeys, string>>({
   fullName: '',
   email: '',
@@ -62,6 +61,8 @@ const handleGenderChange = (selectedValue: Gender) => {
         :on-birth-date-change="handleBirthDateChange"
         :on-gender-change="handleGenderChange"
       />
+
+      <CardInformation />
     </div>
   </div>
 </template>

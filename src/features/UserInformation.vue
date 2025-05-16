@@ -24,6 +24,7 @@ defineProps<{
 interface Field<T> {
   key: T;
   title: string;
+  placeholder?: string;
 }
 
 const getYearOptions = () => {
@@ -55,7 +56,7 @@ const birthDateOptions: Record<UserBirthDateFieldKeys, string[]> = {
 const userInfoInputs: Field<UserInfoInput>[] = [
   { key: 'fullName', title: 'Full Name' },
   { key: 'email', title: 'Email' },
-  { key: 'zip', title: 'Zip Code' }
+  { key: 'zip', title: 'Zip Code', placeholder: '10001' }
 ];
 const birthDateFields: Field<UserBirthDateFieldKeys>[] = [
   { key: 'month', title: 'Month' },
@@ -70,6 +71,7 @@ const birthDateFields: Field<UserBirthDateFieldKeys>[] = [
       <Input
         :value="formInfoState[field.key as UserInfoInput]"
         :error-message="formErrors[field.key]"
+        :placeholder="field.placeholder"
         :onChange="(val) => onInputChange(field.key, val)"
       >
         <template v-if="field.key === 'zip'" #prefix>

@@ -4,6 +4,7 @@ import ErrorContainer from './ErrorContainer.vue';
 const props = defineProps<{
   value: string;
   errorMessage?: string;
+  placeholder?: string;
   onChange: (value: string) => void;
 }>();
 
@@ -20,10 +21,12 @@ function handleInput(event: Event) {
     >
       <slot name="prefix" />
       <input
-        class="text-field-value flex-1 bg-transparent outline-none"
+        class="w-full text-field-value flex-1 outline-none"
         :value="value"
+        :placeholder="placeholder"
         @input="handleInput"
       />
+      <slot name="suffix" />
     </div>
     <ErrorContainer :errorMessage="errorMessage" />
   </div>
