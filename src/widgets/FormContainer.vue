@@ -15,7 +15,7 @@ const formState = reactive<FormState>({
     year: ''
   },
   gender: 'female',
-  nameOnCard: '',
+  cardHolder: '',
   cardNumber: '',
   expirationDate: '',
   cvv: ''
@@ -26,7 +26,7 @@ const formErrors = reactive<Record<FormErrorKeys, string>>({
   email: '',
   zip: '',
   birthDate: '',
-  nameOnCard: '',
+  cardHolder: '',
   cardNumber: '',
   expirationDate: '',
   cvv: ''
@@ -62,7 +62,11 @@ const handleGenderChange = (selectedValue: Gender) => {
         :on-gender-change="handleGenderChange"
       />
 
-      <CardInformation />
+      <CardInformation
+        :form-card-state="formState"
+        :form-errors="formErrors"
+        :on-input-change="handleInputChange"
+      />
     </div>
   </div>
 </template>

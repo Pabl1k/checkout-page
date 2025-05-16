@@ -15,7 +15,7 @@ import RadioButton from '../shared/ui/RadioButton.vue';
 
 defineProps<{
   formInfoState: UserInfoState;
-  formErrors: Record<FormErrorKeys | 'birthDate', string>;
+  formErrors: Record<FormErrorKeys, string>;
   onInputChange: (key: InputFieldKeys, value: string) => void;
   onBirthDateChange: (key: UserBirthDateFieldKeys, value: string) => void;
   onGenderChange: (selected: Gender) => void;

@@ -1,7 +1,17 @@
 <script setup lang="ts">
 import lock from '../shared/assets/lock.svg';
+import type { CardInfoState } from '../shared/types/cardInfo.ts';
+import type { FormErrorKeys, InputFieldKeys } from '../shared/types/form.ts';
 import FieldWrapper from '../shared/ui/FieldWrapper.vue';
 import Input from '../shared/ui/Input.vue';
+
+const props = defineProps<{
+  formCardState: CardInfoState;
+  formErrors: Record<FormErrorKeys, string>;
+  onInputChange: (key: InputFieldKeys, value: string) => void;
+}>();
+
+const { cardHolder, cardNumber, expirationDate, cvv } = props.formCardState;
 </script>
 
 <template>
@@ -9,11 +19,19 @@ import Input from '../shared/ui/Input.vue';
     class="max-mobile:mt-[15px] mt-[20px] max-mobile:p-2 max-mobile:pb-0 pt-6 mobile:pb-4 px-6 bg-card-background border border-card-section-border max-mobile:rounded-[3.69px] rounded-sm"
   >
     <FieldWrapper title="Card Holder Name" smallText>
-      <Input value="" error-message="" :onChange="() => console.log('')" />
+      <Input
+        :value="cardHolder"
+        :error-message="formErrors.cardHolder"
+        :onChange="(val) => onInputChange('cardHolder', val)"
+      />
     </FieldWrapper>
 
     <FieldWrapper title="Card Number" smallText>
-      <Input value="" error-message="" :onChange="() => console.log('')">
+      <Input
+        :value="cardNumber"
+        :error-message="formErrors.cardNumber"
+        :onChange="(val) => onInputChange('cardNumber', val)"
+      >
         <template #suffix>
           <img
             :src="lock"
@@ -26,10 +44,19 @@ import Input from '../shared/ui/Input.vue';
 
     <div class="flex gap-2">
       <FieldWrapper title="Expiration date" smallText>
-        <Input value="" error-message="" placeholder="MM/DD" :onChange="() => console.log('')" />
+        <Input
+          :value="expirationDate"
+          :error-message="formErrors.expirationDate"
+          placeholder="MM/DD"
+          :onChange="(val) => onInputChange('expirationDate', val)"
+        />
       </FieldWrapper>
       <FieldWrapper title="CVV" smallText>
-        <Input value="" error-message="" :onChange="() => console.log('')" />
+        <Input
+          :value="cvv"
+          :error-message="formErrors.cvv"
+          :onChange="(val) => onInputChange('cvv', val)"
+        />
       </FieldWrapper>
     </div>
   </div>
