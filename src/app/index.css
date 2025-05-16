@@ -15,10 +15,11 @@
     
     --color-form-title: #000000;
     --color-field-name: #27272A;
-    --color-field-placeholder: #71717A;
+    --color-field-value: #71717A;
     --color-field-border: #D4D4D8;
     --color-field-arrow: #6C6C6C;
     --color-radio-button-border: #D8D6D6;
+    --color-radio-button-text: #2F2F30;
     --color-lock-icon: #7B8091;
     --color-footer-text: #8C8C8F;
 }
