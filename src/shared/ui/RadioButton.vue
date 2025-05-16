@@ -1,19 +1,18 @@
 <script setup lang="ts">
 import clsx from 'clsx';
+import type { Gender } from '../types/userInfo.ts';
 
 const props = defineProps<{
   label: string;
-  value: string;
+  value: Gender;
   selected: boolean;
 }>();
 
-const emit = defineEmits<{
-  (e: 'update:modelValue', value: string): void;
-}>();
+const emit = defineEmits<(e: 'update', value: Gender) => void>();
 
-function handleClick() {
-  emit('update:modelValue', props.value);
-}
+const handleClick = () => {
+  emit('update', props.value);
+};
 </script>
 
 <template>

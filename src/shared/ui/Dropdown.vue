@@ -7,13 +7,11 @@ defineProps<{
   placeholder: string;
 }>();
 
-const emit = defineEmits<{
-  (e: 'update:modelValue', value: string): void;
-}>();
+const emit = defineEmits<(e: 'update', value: string) => void>();
 
 function handleChange(event: Event) {
   const target = event.target as HTMLSelectElement;
-  emit('update:modelValue', target.value);
+  emit('update', target.value);
 }
 </script>
 
