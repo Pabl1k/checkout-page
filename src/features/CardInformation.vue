@@ -1,14 +1,65 @@
 <script setup lang="ts">
+import Cleave from 'cleave.js';
+import { ref, onMounted, watch, type ComponentPublicInstance } from 'vue';
 import type { CardInfoState } from '../shared/types/cardInfo.ts';
 import type { FormErrorKeys, FormState } from '../shared/types/form.ts';
 import FieldWrapper from '../shared/ui/FieldWrapper.vue';
 import Input from '../shared/ui/Input.vue';
 
-defineProps<{
+const props = defineProps<{
   formCardState: CardInfoState;
   formErrors: Record<FormErrorKeys, string>;
   onChange: <K extends keyof FormState>(key: K, value: FormState[K]) => void;
 }>();
+
+const cardNumberRef = ref<ComponentPublicInstance | null>(null);
+const expirationDateRef = ref<ComponentPublicInstance | null>(null);
+
+let cleaveCardNumber: Cleave | null = null;
+let cleaveExpirationDate: Cleave | null = null;
+
+onMounted(() => {
+  const cardInputEl = cardNumberRef.value?.$el.querySelector('input');
+
+  if (cardInputEl) {
+    cleaveCardNumber = new Cleave(cardInputEl, {
+      creditCard: true,
+      onValueChanged: (e) => {
+        props.onChange('cardNumber', e.target.rawValue);
+      }
+    });
+  }
+
+  const expDateInputEl = expirationDateRef.value?.$el.querySelector('input');
+
+  if (expDateInputEl) {
+    cleaveExpirationDate = new Cleave(expDateInputEl, {
+      date: true,
+      datePattern: ['m', 'y'],
+      onValueChanged: (e) => {
+        props.onChange('expirationDate', e.target.value);
+      }
+    });
+  }
+});
+
+watch(
+  () => props.formCardState.cardNumber,
+  (newVal) => {
+    if (cleaveCardNumber && newVal !== cleaveCardNumber.getRawValue()) {
+      cleaveCardNumber.setRawValue(newVal);
+    }
+  }
+);
+
+watch(
+  () => props.formCardState.expirationDate,
+  (newVal) => {
+    if (cleaveExpirationDate && newVal !== cleaveExpirationDate.getFormattedValue()) {
+      cleaveExpirationDate.setRawValue(newVal);
+    }
+  }
+);
 </script>
 
 <template>
@@ -25,6 +76,7 @@ defineProps<{
 
     <FieldWrapper title="Card Number" smallText>
       <Input
+        ref="cardNumberRef"
         :value="formCardState.cardNumber"
         :error-message="formErrors.cardNumber"
         :onChange="(val) => onChange('cardNumber', val)"
@@ -42,6 +94,7 @@ defineProps<{
     <div class="flex gap-2">
       <FieldWrapper title="Expiration date" smallText>
         <Input
+          ref="expirationDateRef"
           :value="formCardState.expirationDate"
           :error-message="formErrors.expirationDate"
           placeholder="MM/YY"
