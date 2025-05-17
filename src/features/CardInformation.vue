@@ -13,7 +13,7 @@ defineProps<{
 </script>
 
 <template>
-  <div
+  <section
     class="max-mobile:mt-[15px] mt-5 max-mobile:p-2 max-mobile:pb-0 pt-6 mobile:pb-4 px-6 bg-card-background border border-card-section-border max-mobile:rounded-[3.69px] rounded-sm"
   >
     <FieldWrapper title="Card Holder Name" smallText>
@@ -57,5 +57,5 @@ defineProps<{
         />
       </FieldWrapper>
     </div>
-  </div>
+  </section>
 </template>

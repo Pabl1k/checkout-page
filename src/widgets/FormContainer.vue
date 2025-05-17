@@ -52,7 +52,7 @@ const handleSubmit = () => {
 </script>
 
 <template>
-  <div
+  <main
     class="bg-form-background flex flex-col items-center max-mobile:py-[22px] max-mobile:px-[20px] py-[34px] px-[24px] gap-[34px] rounded-[4.59px] border border-form-border"
   >
     <div class="max-mobile:w-[250px] w-[328px]">
@@ -76,5 +76,5 @@ const handleSubmit = () => {
         <SubmitButton @click="handleSubmit">continue</SubmitButton>
       </div>
     </div>
-  </div>
+  </main>
 </template>
