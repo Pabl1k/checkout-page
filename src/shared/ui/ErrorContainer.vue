@@ -5,7 +5,7 @@ defineProps<{
 </script>
 
 <template>
-  <div class="max-mobile:h-[15px] h-[20px]">
+  <div class="max-mobile:h-[15px] h-5">
     <p v-if="errorMessage" class="max-mobile:text-xs text-sm text-red-500">
       {{ errorMessage }}
     </p>

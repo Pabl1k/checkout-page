@@ -15,7 +15,7 @@ function goToCheckout() {
     <div v-if="currentRoute === CHECKOUT_ROUTE">
       <Checkout />
     </div>
-    <div v-else>
+    <div v-else class="h-screen">
       <p @click="goToCheckout" class="cursor-pointer text-blue-500 underline">Go to checkout</p>
     </div>
   </div>

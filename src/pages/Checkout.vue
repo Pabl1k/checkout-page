@@ -5,7 +5,7 @@ import Header from '../widgets/Header.vue';
 
 <template>
   <Header />
-  <div class="flex justify-center mt-[36px] max-mobile:mt-[18px]">
+  <div class="flex justify-center mt-9 max-mobile:mt-[18px]">
     <FormContainer />
   </div>
 </template>
