@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import arrows from '../assets/arrows.svg';
-
 defineProps<{
   value: string;
   options: string[];
@@ -31,7 +29,7 @@ function handleChange(event: Event) {
     <div
       class="flex flex-col gap-1 absolute right-[5px] top-1/2 transform -translate-y-1/2 pointer-events-none"
     >
-      <img :src="arrows" alt="arrows" class="w-[5.48px] h-[12px]" />
+      <img src="/assets/arrows.svg" alt="arrows" class="w-[5.48px] h-[12px]" />
     </div>
   </div>
 </template>

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import pin from '../shared/assets/pin.svg';
 import type { FormErrorKeys, FormState } from '../shared/types/form.ts';
 import type {
   UserBirthDateFieldKeys,
@@ -74,7 +73,7 @@ const birthDateFields: Field<UserBirthDateFieldKeys>[] = [
           :onChange="(val) => onChange(key, val)"
         >
           <template v-if="key === 'zip'" #prefix>
-            <img :src="pin" alt="pin" class="size-[18px] mr-1" />
+            <img src="/assets/pin.svg" alt="pin" class="size-[18px] mr-1" />
           </template>
         </Input>
       </FieldWrapper>

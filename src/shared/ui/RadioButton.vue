@@ -23,7 +23,7 @@ const handleClick = () => {
         selected
           ? 'bg-radio-button-background text-form-background'
           : 'bg-form-background text-radio-button-text border border-radio-button-border',
-        'w-full h-[43px] flex items-center gap-2 rounded-sm px-6 cursor-pointer'
+        'w-full h-[43px] flex items-center gap-2 rounded-sm px-6 cursor-pointer focus-within:outline focus-within:outline focus-within:outline-header-background'
       )
     "
     @click="handleClick"

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import lock from '../shared/assets/lock.svg';
 import type { CardInfoState } from '../shared/types/cardInfo.ts';
 import type { FormErrorKeys, FormState } from '../shared/types/form.ts';
 import FieldWrapper from '../shared/ui/FieldWrapper.vue';
@@ -32,7 +31,7 @@ defineProps<{
       >
         <template #suffix>
           <img
-            :src="lock"
+            src="/assets/lock.svg"
             alt="pin"
             class="w-[10px] h-[13px] max-mobile:w-[9.22px] max-mobile:h-[11.98px]"
           />
