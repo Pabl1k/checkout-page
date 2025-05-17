@@ -15,3 +15,5 @@ export interface UserInfoState {
   birthDate: BirthDate;
   gender: Gender;
 }
+
+export type UserInfoErrorKeys = keyof Omit<UserInfoState, 'gender'>;

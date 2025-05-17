@@ -2,10 +2,11 @@
 import { reactive } from 'vue';
 import CardInformation from '../features/CardInformation.vue';
 import UserInformation from '../features/UserInformation.vue';
-import type { FormErrorKeys, FormState, InputFieldKeys } from '../shared/types/form.ts';
-import type { Gender, UserBirthDateFieldKeys } from '../shared/types/userInfo.ts';
+import type { FormErrorKeys, FormState } from '../shared/types/form.ts';
+import type { BirthDate } from '../shared/types/userInfo.ts';
+import SubmitButton from '../shared/ui/SubmitButton.vue';
 
-const formState = reactive<FormState>({
+const initialFormState: FormState = {
   fullName: '',
   email: '',
   zip: '',
@@ -19,9 +20,8 @@ const formState = reactive<FormState>({
   cardNumber: '',
   expirationDate: '',
   cvv: ''
-});
-
-const formErrors = reactive<Record<FormErrorKeys, string>>({
+};
+const initialFormErrors: Record<FormErrorKeys, string> = {
   fullName: '',
   email: '',
   zip: '',
@@ -30,18 +30,24 @@ const formErrors = reactive<Record<FormErrorKeys, string>>({
   cardNumber: '',
   expirationDate: '',
   cvv: ''
-});
-
-const handleInputChange = (key: InputFieldKeys, value: string) => {
-  formState[key] = value;
 };
 
-const handleBirthDateChange = (key: UserBirthDateFieldKeys, value: string) => {
-  formState.birthDate[key] = value;
+const formState = reactive<FormState>({ ...initialFormState });
+const formErrors = reactive<Record<FormErrorKeys, string>>(initialFormErrors);
+
+const handleChange = <K extends keyof FormState>(key: K, value: FormState[K]) => {
+  if (key === 'birthDate') {
+    formState.birthDate = value as BirthDate;
+  } else {
+    formState[key] = value;
+  }
 };
 
-const handleGenderChange = (selectedValue: Gender) => {
-  formState.gender = selectedValue;
+const handleSubmit = () => {
+  // Handle form submission logic here
+  console.log('Form submitted:', formState);
+  // form reset
+  Object.assign(formState, structuredClone(initialFormState));
 };
 </script>
 
@@ -57,16 +63,18 @@ const handleGenderChange = (selectedValue: Gender) => {
       <UserInformation
         :form-info-state="formState"
         :form-errors="formErrors"
-        :on-input-change="handleInputChange"
-        :on-birth-date-change="handleBirthDateChange"
-        :on-gender-change="handleGenderChange"
+        :on-change="handleChange"
       />
 
       <CardInformation
         :form-card-state="formState"
         :form-errors="formErrors"
-        :on-input-change="handleInputChange"
+        :on-change="handleChange"
       />
+
+      <div class="max-mobile:mt-[14px] mt-[34px]">
+        <SubmitButton @click="handleSubmit">continue</SubmitButton>
+      </div>
     </div>
   </div>
 </template>

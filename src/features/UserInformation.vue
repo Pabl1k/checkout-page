@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import pin from '../shared/assets/pin.svg';
-import type { FormErrorKeys, InputFieldKeys } from '../shared/types/form.ts';
+import type { FormErrorKeys, FormState } from '../shared/types/form.ts';
 import type {
-  Gender,
   UserBirthDateFieldKeys,
   UserInfoInput,
   UserInfoState
@@ -16,9 +15,7 @@ import RadioButton from '../shared/ui/RadioButton.vue';
 defineProps<{
   formInfoState: UserInfoState;
   formErrors: Record<FormErrorKeys, string>;
-  onInputChange: (key: InputFieldKeys, value: string) => void;
-  onBirthDateChange: (key: UserBirthDateFieldKeys, value: string) => void;
-  onGenderChange: (selected: Gender) => void;
+  onChange: <K extends keyof FormState>(key: K, value: FormState[K]) => void;
 }>();
 
 interface Field<T> {
@@ -66,15 +63,15 @@ const birthDateFields: Field<UserBirthDateFieldKeys>[] = [
 </script>
 
 <template>
-  <div v-for="field in userInfoInputs" :key="field.key">
-    <FieldWrapper :title="field.title">
+  <div v-for="{ key, title, placeholder } in userInfoInputs" :key="key">
+    <FieldWrapper :title="title">
       <Input
-        :value="formInfoState[field.key as UserInfoInput]"
-        :error-message="formErrors[field.key]"
-        :placeholder="field.placeholder"
-        :onChange="(val) => onInputChange(field.key, val)"
+        :value="formInfoState[key as UserInfoInput]"
+        :error-message="formErrors[key]"
+        :placeholder="placeholder"
+        :onChange="(val) => onChange(key, val)"
       >
-        <template v-if="field.key === 'zip'" #prefix>
+        <template v-if="key === 'zip'" #prefix>
           <img :src="pin" alt="pin" class="size-[18px] mr-1" />
         </template>
       </Input>
@@ -92,7 +89,7 @@ const birthDateFields: Field<UserBirthDateFieldKeys>[] = [
           :value="formInfoState.birthDate[key]"
           :options="birthDateOptions[key]"
           :placeholder="title"
-          @update="(val) => onBirthDateChange(key, val)"
+          @update="(val) => onChange('birthDate', { ...formInfoState.birthDate, [key]: val })"
         />
       </div>
     </div>
@@ -105,13 +102,13 @@ const birthDateFields: Field<UserBirthDateFieldKeys>[] = [
         label="Female"
         value="female"
         :selected="formInfoState.gender === 'female'"
-        @update="onGenderChange"
+        @update="() => onChange('gender', 'female')"
       />
       <RadioButton
         label="Male"
         value="male"
         :selected="formInfoState.gender === 'male'"
-        @update="onGenderChange"
+        @update="() => onChange('gender', 'male')"
       />
     </div>
   </FieldWrapper>
