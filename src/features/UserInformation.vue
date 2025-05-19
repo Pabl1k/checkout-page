@@ -69,7 +69,6 @@ const birthDateFields: Field<UserBirthDateFieldKeys>[] = [
           :value="formInfoState[key as UserInfoInput]"
           :error-message="formErrors[key]"
           :placeholder="placeholder"
-          :disabled="key === 'zip'"
           :onChange="(val) => onChange(key, val)"
         >
           <template v-if="key === 'zip'" #prefix>

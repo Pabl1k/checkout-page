@@ -11,7 +11,6 @@ const props = defineProps<{
     type: InputMode;
     default: 'text';
   };
-  disabled?: boolean;
   onChange: (value: string) => void;
 }>();
 
@@ -29,11 +28,9 @@ function handleInput(event: Event) {
       <slot name="prefix" />
       <input
         class="w-full h-full text-field-value flex-1 outline-none"
-        :tabindex="disabled ? -1 : 0"
         :inputMode="inputMode"
         :value="value"
         :placeholder="placeholder"
-        :disabled="disabled"
         @input="handleInput"
       />
       <slot name="suffix" />
