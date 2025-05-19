@@ -1,6 +1,7 @@
 import { reactive } from 'vue';
-import type { FormErrorKeys, FormState } from '../../shared/types/form';
+import type { FormState } from '../../shared/types/form';
 import type { BirthDate } from '../../shared/types/userInfo';
+import { useFormValidation } from './useFormValidation.ts';
 
 const initialFormState: FormState = {
   fullName: '',
@@ -17,20 +18,10 @@ const initialFormState: FormState = {
   expirationDate: '',
   cvv: ''
 };
-const initialFormErrors: Record<FormErrorKeys, string> = {
-  fullName: '',
-  email: '',
-  zip: '',
-  birthDate: '',
-  cardHolder: '',
-  cardNumber: '',
-  expirationDate: '',
-  cvv: ''
-};
 
 export const useForm = () => {
   const formState = reactive<FormState>({ ...initialFormState });
-  const formErrors = reactive<Record<FormErrorKeys, string>>(initialFormErrors);
+  const { formErrors, validate } = useFormValidation(formState);
 
   const handleChange = <K extends keyof FormState>(key: K, value: FormState[K]) => {
     if (key === 'birthDate') {
@@ -40,10 +31,14 @@ export const useForm = () => {
     }
   };
 
-  const handleSubmit = () => {
-    // Handle form submission logic here
+  const handleSubmit = async () => {
+    const formValid = await validate();
+
+    if (!formValid) {
+      return;
+    }
+
     console.log('Form submitted:', formState);
-    // form reset
     Object.assign(formState, structuredClone(initialFormState));
   };
 
