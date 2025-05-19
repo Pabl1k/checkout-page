@@ -10,6 +10,7 @@ import ErrorContainer from '../shared/ui/ErrorContainer.vue';
 import FieldWrapper from '../shared/ui/FieldWrapper.vue';
 import Input from '../shared/ui/Input.vue';
 import RadioButton from '../shared/ui/RadioButton.vue';
+import { birthDateOptions } from './model/dateOptions.ts';
 
 defineProps<{
   formInfoState: UserInfoState;
@@ -22,32 +23,6 @@ interface Field<T> {
   title: string;
   placeholder?: string;
 }
-
-const getYearOptions = () => {
-  const start = 1900;
-  const end = new Date().getFullYear();
-  const years: string[] = [];
-
-  for (let year = start; year <= end; year++) {
-    years.push(String(year));
-  }
-
-  return years;
-};
-
-const getMonthOptions = () =>
-  Array.from({ length: 12 }, (_, i) =>
-    new Intl.DateTimeFormat('en-US', { month: 'long' }).format(new Date(2000, i))
-  );
-
-// change to display days by month
-const getDayOptions = () => Array.from({ length: 31 }, (_, i) => String(i + 1));
-
-const birthDateOptions: Record<UserBirthDateFieldKeys, string[]> = {
-  month: getMonthOptions(),
-  day: getDayOptions(),
-  year: getYearOptions()
-};
 
 const userInfoInputs: Field<UserInfoInput>[] = [
   { key: 'fullName', title: 'Full Name' },

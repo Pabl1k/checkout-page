@@ -10,7 +10,7 @@ import {
   fullNameValidator
 } from '../model/validators.ts';
 
-const requiredErrorText = 'Field is required';
+const REQUIRED_FIELD_ERROR_TEXT = 'Field is required';
 
 export const useFormValidation = (state: FormState) => {
   const formErrors = reactive<Record<FormErrorKeys, string>>({ ...initialFormErrors });
@@ -39,7 +39,7 @@ export const useFormValidation = (state: FormState) => {
 
       if (!v$.value[fieldName].$valid) {
         if (v$.value[fieldName].required.$invalid) {
-          formErrors[fieldName] = requiredErrorText;
+          formErrors[fieldName] = REQUIRED_FIELD_ERROR_TEXT;
         } else if (withValidator && v$.value[fieldName][validator].$invalid) {
           formErrors[fieldName] = v$.value[fieldName][validator].$message;
         }
@@ -61,7 +61,7 @@ export const useFormValidation = (state: FormState) => {
 
     if (!v$.value.cardHolder.$valid) {
       if (v$.value.cardHolder.required.$invalid) {
-        formErrors.cardHolder = requiredErrorText;
+        formErrors.cardHolder = REQUIRED_FIELD_ERROR_TEXT;
       } else if (v$.value.cardHolder.fullNameValidator.$invalid) {
         formErrors.cardHolder = v$.value.cardHolder.fullNameValidator.$message;
       }
