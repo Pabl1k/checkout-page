@@ -11,6 +11,7 @@ const props = defineProps<{
     type: InputMode;
     default: 'text';
   };
+  onBlur?: () => void;
   onChange: (value: string) => void;
 }>();
 
@@ -32,6 +33,7 @@ function handleInput(event: Event) {
         :value="value"
         :placeholder="placeholder"
         @input="handleInput"
+        @blur="onBlur"
       />
       <slot name="suffix" />
     </div>

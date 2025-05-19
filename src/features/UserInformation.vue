@@ -15,6 +15,7 @@ import { birthDateOptions } from './model/dateOptions.ts';
 defineProps<{
   formInfoState: UserInfoState;
   formErrors: Record<FormErrorKeys, string>;
+  onFullNameBlur: () => void;
   onChange: <K extends keyof FormState>(key: K, value: FormState[K]) => void;
 }>();
 
@@ -45,6 +46,7 @@ const birthDateFields: Field<UserBirthDateFieldKeys>[] = [
           :error-message="formErrors[key]"
           :placeholder="placeholder"
           :onChange="(val) => onChange(key, val)"
+          :onBlur="key === 'fullName' ? onFullNameBlur : undefined"
         >
           <template v-if="key === 'zip'" #prefix>
             <img src="/assets/pin.svg" alt="pin" class="size-[18px] mr-1" />

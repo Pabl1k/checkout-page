@@ -16,6 +16,10 @@ export const useForm = () => {
     }
   };
 
+  const holderNameAutoFill = () => {
+    formState.cardHolder = formState.fullName;
+  };
+
   const handleSubmit = async () => {
     const formValid = await validate();
 
@@ -31,6 +35,7 @@ export const useForm = () => {
     formState,
     formErrors,
     handleChange,
+    holderNameAutoFill,
     handleSubmit
   };
 };

@@ -4,7 +4,7 @@ import UserInformation from '../../features/UserInformation.vue';
 import SubmitButton from '../../shared/ui/SubmitButton.vue';
 import { useForm } from './hooks/useForm.ts';
 
-const { formState, formErrors, handleChange, handleSubmit } = useForm();
+const { formState, formErrors, handleChange, holderNameAutoFill, handleSubmit } = useForm();
 </script>
 
 <template>
@@ -19,6 +19,7 @@ const { formState, formErrors, handleChange, handleSubmit } = useForm();
       <UserInformation
         :form-info-state="formState"
         :form-errors="formErrors"
+        :on-full-name-blur="holderNameAutoFill"
         :on-change="handleChange"
       />
 
