@@ -1,23 +1,8 @@
 import { reactive } from 'vue';
-import type { FormState } from '../../shared/types/form';
-import type { BirthDate } from '../../shared/types/userInfo';
+import type { FormState } from '../../../shared/types/form';
+import type { BirthDate } from '../../../shared/types/userInfo';
+import { initialFormState } from '../model/initialState.ts';
 import { useFormValidation } from './useFormValidation.ts';
-
-const initialFormState: FormState = {
-  fullName: '',
-  email: '',
-  zip: '',
-  birthDate: {
-    month: '',
-    day: '',
-    year: ''
-  },
-  gender: 'female',
-  cardHolder: '',
-  cardNumber: '',
-  expirationDate: '',
-  cvv: ''
-};
 
 export const useForm = () => {
   const formState = reactive<FormState>({ ...initialFormState });

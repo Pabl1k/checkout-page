@@ -2,7 +2,7 @@
 import CardInformation from '../../features/CardInformation.vue';
 import UserInformation from '../../features/UserInformation.vue';
 import SubmitButton from '../../shared/ui/SubmitButton.vue';
-import { useForm } from './useForm.ts';
+import { useForm } from './hooks/useForm.ts';
 
 const { formState, formErrors, handleChange, handleSubmit } = useForm();
 </script>
