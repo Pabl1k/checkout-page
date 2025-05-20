@@ -4,19 +4,22 @@ import ErrorContainer from './ErrorContainer.vue';
 
 type InputMode = 'text' | 'email' | 'numeric';
 
-const props = defineProps<{
-  id: string;
-  value: string;
-  errorMessage?: string;
-  placeholder?: string;
-  inputMode?: {
-    type: InputMode;
-    default: 'text';
-  };
-  cardSection?: boolean;
-  onBlur?: () => void;
-  onChange: (value: string) => void;
-}>();
+const props = withDefaults(
+  defineProps<{
+    id: string;
+    value: string;
+    errorMessage?: string;
+    placeholder?: string;
+    inputMode?: InputMode;
+    cardSection?: boolean;
+    onBlur?: () => void;
+    onChange: (value: string) => void;
+  }>(),
+  {
+    inputMode: 'text',
+    cardSection: false
+  }
+);
 
 function handleInput(event: Event) {
   const target = event.target as HTMLInputElement;

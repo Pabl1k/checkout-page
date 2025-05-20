@@ -15,7 +15,6 @@
     "vue": "^3.5.13"
   },
   "devDependencies": {
-    "@eslint/js": "^9.19.0",
     "@tailwindcss/vite": "^4.0.8",
     "@trivago/prettier-plugin-sort-imports": "^5.2.2",
     "@types/cleave.js": "^1.4.12",

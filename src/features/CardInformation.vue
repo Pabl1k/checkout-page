@@ -80,6 +80,7 @@ watch(
       <Input
         ref="cardNumberRef"
         id="cardNumber"
+        inputMode="numeric"
         :value="formCardState.cardNumber"
         :error-message="formErrors.cardNumber"
         card-section
@@ -100,6 +101,7 @@ watch(
         <Input
           ref="expirationDateRef"
           id="expirationDate"
+          inputMode="numeric"
           :value="formCardState.expirationDate"
           :error-message="formErrors.expirationDate"
           placeholder="MM/YY"
@@ -110,6 +112,7 @@ watch(
       <FieldWrapper label-id="cvv" title="CVV" smallText>
         <Input
           id="cvv"
+          inputMode="numeric"
           :value="formCardState.cvv"
           :error-message="formErrors.cvv"
           card-section

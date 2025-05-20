@@ -42,6 +42,7 @@ const birthDateFields: Field<UserBirthDateFieldKeys>[] = [
       <FieldWrapper :label-id="key" :title="title">
         <Input
           :id="key"
+          :input-mode="key === 'email' ? 'email' : 'text'"
           :value="formInfoState[key as UserInfoInput]"
           :error-message="formErrors[key]"
           :onChange="(val) => onChange(key, val)"
