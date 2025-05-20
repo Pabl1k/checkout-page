@@ -4,6 +4,20 @@ import type { BirthDate } from '../../../shared/types/userInfo';
 import { initialFormState } from '../model/initialState.ts';
 import { useFormValidation } from './useFormValidation.ts';
 
+interface ApiResponse {
+  status: number;
+  message: string;
+}
+
+const fakeApiPost = (endpoint: string, data: any): Promise<ApiResponse> => {
+  console.log('Submitted data:', data);
+
+  return Promise.resolve({
+    status: 200,
+    message: `${endpoint} request submitted`
+  });
+};
+
 export const useForm = () => {
   const formState = reactive<FormState>({ ...initialFormState });
   const { formErrors, validate } = useFormValidation(formState);
@@ -36,8 +50,15 @@ export const useForm = () => {
       return;
     }
 
-    console.log('Form submitted:', formState);
+    const response = await fakeApiPost('fakeEndpoint', JSON.stringify(formState));
+
+    if (response.status !== 200) {
+      console.error('Error submitting form');
+      return;
+    }
+
     Object.assign(formState, structuredClone(initialFormState));
+    alert('Form submitted successfully!');
   };
 
   return {
