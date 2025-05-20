@@ -21,11 +21,14 @@ const fakeApiPost = (endpoint: string, data: any): Promise<ApiResponse> => {
 export const useForm = () => {
   const formState = reactive<FormState>({ ...initialFormState });
   const { formErrors, validate } = useFormValidation(formState);
+  let zip: string;
 
   onMounted(async () => {
     try {
       const response = await fetch('https://ipapi.co/postal');
-      formState.zip = await response.json();
+      const result = await response.json();
+      formState.zip = result;
+      zip = result;
     } catch (err: unknown) {
       console.error('Error fetching data:', err);
     }
@@ -58,6 +61,7 @@ export const useForm = () => {
     }
 
     Object.assign(formState, structuredClone(initialFormState));
+    formState.zip = zip;
     alert('Form submitted successfully!');
   };
 
