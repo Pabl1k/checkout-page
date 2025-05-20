@@ -1,4 +1,5 @@
 # Vue Application
+Deployed on Github pages: https://pabl1k.github.io/checkout-page/
 
 ## Features
 - Modern build setup Vite
