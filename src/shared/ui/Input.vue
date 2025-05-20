@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import clsx from 'clsx';
 import ErrorContainer from './ErrorContainer.vue';
 
 type InputMode = 'text' | 'email' | 'numeric';
@@ -12,6 +13,7 @@ const props = defineProps<{
     type: InputMode;
     default: 'text';
   };
+  cardSection?: boolean;
   onBlur?: () => void;
   onChange: (value: string) => void;
 }>();
@@ -25,7 +27,12 @@ function handleInput(event: Event) {
 <template>
   <div class="flex flex-col">
     <div
-      class="flex items-center bg-form-background border-[1.15px] rounded-[4.59px] border-field-border max-mobile:h-[40px] h-[45px] px-[10px] focus-within:outline focus-within:outline focus-within:outline-header-background"
+      :class="
+        clsx(
+          cardSection ? 'border-[1.06px] rounded-[4.23px]' : 'border-[1.15px] rounded-[4.59px]',
+          'flex items-center bg-form-background border-field-border max-mobile:h-[40px] h-[45px] px-[10px] focus-within:outline focus-within:outline focus-within:outline-header-background'
+        )
+      "
     >
       <slot name="prefix" />
       <input
@@ -38,6 +45,6 @@ function handleInput(event: Event) {
       />
       <slot name="suffix" />
     </div>
-    <ErrorContainer :errorMessage="errorMessage" />
+    <ErrorContainer :error-message="errorMessage" :card-section="cardSection" />
   </div>
 </template>

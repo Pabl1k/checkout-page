@@ -64,13 +64,14 @@ watch(
 
 <template>
   <section
-    class="max-mobile:mt-[15px] mt-5 max-mobile:p-2 max-mobile:pb-0 pt-6 mobile:pb-4 px-6 bg-card-background border border-card-section-border max-mobile:rounded-[3.69px] rounded-sm"
+    class="max-mobile:mt-[15px] mt-5 max-mobile:p-2 max-mobile:pb-0 pt-6 mobile:pb-4 px-6 bg-card-background border border-card-section-border max-mobile:border-[0.92px] max-mobile:rounded-[3.69px] rounded-sm"
   >
     <FieldWrapper label-id="cardHolder" title="Card Holder Name" smallText>
       <Input
         id="cardHolder"
         :value="formCardState.cardHolder"
         :error-message="formErrors.cardHolder"
+        card-section
         :onChange="(val) => onChange('cardHolder', val)"
       />
     </FieldWrapper>
@@ -81,6 +82,7 @@ watch(
         id="cardNumber"
         :value="formCardState.cardNumber"
         :error-message="formErrors.cardNumber"
+        card-section
         :onChange="(val) => onChange('cardNumber', val)"
       >
         <template #suffix>
@@ -101,6 +103,7 @@ watch(
           :value="formCardState.expirationDate"
           :error-message="formErrors.expirationDate"
           placeholder="MM/YY"
+          card-section
           :onChange="(val) => onChange('expirationDate', val)"
         />
       </FieldWrapper>
@@ -109,6 +112,7 @@ watch(
           id="cvv"
           :value="formCardState.cvv"
           :error-message="formErrors.cvv"
+          card-section
           :onChange="(val) => onChange('cvv', val)"
         />
       </FieldWrapper>

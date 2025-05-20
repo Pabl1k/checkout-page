@@ -11,7 +11,7 @@ function goToCheckout() {
 </script>
 
 <template>
-  <div class="font-script bg-main-background">
+  <div class="font-script bg-main-background min-h-screen">
     <div v-if="currentRoute === CHECKOUT_ROUTE">
       <Checkout />
     </div>
