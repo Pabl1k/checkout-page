@@ -2,11 +2,15 @@
 import { ref } from 'vue';
 import Checkout from '../pages/Checkout.vue';
 
-const CHECKOUT_ROUTE = '/checkout';
-const currentRoute = ref(window.location.pathname);
+const CHECKOUT_ROUTE = '#/checkout';
+const currentRoute = ref(window.location.hash || '#/');
+
+window.addEventListener('hashchange', () => {
+  currentRoute.value = window.location.hash || '#/';
+});
 
 function goToCheckout() {
-  window.location.pathname = CHECKOUT_ROUTE;
+  window.location.hash = CHECKOUT_ROUTE;
 }
 </script>
 
