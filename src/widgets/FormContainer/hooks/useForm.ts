@@ -1,4 +1,4 @@
-import { reactive } from 'vue';
+import { onMounted, reactive } from 'vue';
 import type { FormState } from '../../../shared/types/form';
 import type { BirthDate } from '../../../shared/types/userInfo';
 import { initialFormState } from '../model/initialState.ts';
@@ -7,6 +7,15 @@ import { useFormValidation } from './useFormValidation.ts';
 export const useForm = () => {
   const formState = reactive<FormState>({ ...initialFormState });
   const { formErrors, validate } = useFormValidation(formState);
+
+  onMounted(async () => {
+    try {
+      const response = await fetch('https://ipapi.co/postal');
+      formState.zip = await response.json();
+    } catch (err: unknown) {
+      console.error('Error fetching data:', err);
+    }
+  });
 
   const handleChange = <K extends keyof FormState>(key: K, value: FormState[K]) => {
     if (key === 'birthDate') {

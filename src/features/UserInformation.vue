@@ -22,13 +22,12 @@ defineProps<{
 interface Field<T> {
   key: T;
   title: string;
-  placeholder?: string;
 }
 
 const userInfoInputs: Field<UserInfoInput>[] = [
   { key: 'fullName', title: 'Full Name' },
   { key: 'email', title: 'Email' },
-  { key: 'zip', title: 'Zip Code', placeholder: '10001' }
+  { key: 'zip', title: 'Zip Code' }
 ];
 const birthDateFields: Field<UserBirthDateFieldKeys>[] = [
   { key: 'month', title: 'Month' },
@@ -39,12 +38,11 @@ const birthDateFields: Field<UserBirthDateFieldKeys>[] = [
 
 <template>
   <section>
-    <div v-for="{ key, title, placeholder } in userInfoInputs" :key="key">
+    <div v-for="{ key, title } in userInfoInputs" :key="key">
       <FieldWrapper :title="title">
         <Input
           :value="formInfoState[key as UserInfoInput]"
           :error-message="formErrors[key]"
-          :placeholder="placeholder"
           :onChange="(val) => onChange(key, val)"
           :onBlur="key === 'fullName' ? onFullNameBlur : undefined"
         >
