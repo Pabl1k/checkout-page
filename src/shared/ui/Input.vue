@@ -4,6 +4,7 @@ import ErrorContainer from './ErrorContainer.vue';
 type InputMode = 'text' | 'email' | 'numeric';
 
 const props = defineProps<{
+  id: string;
   value: string;
   errorMessage?: string;
   placeholder?: string;

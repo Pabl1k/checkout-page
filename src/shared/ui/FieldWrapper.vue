@@ -2,6 +2,7 @@
 import clsx from 'clsx';
 
 defineProps<{
+  labelId: string;
   title: string;
   smallText?: boolean;
 }>();
@@ -9,7 +10,8 @@ defineProps<{
 
 <template>
   <div class="flex flex-col">
-    <h2
+    <label
+      :for="labelId"
       :class="
         clsx(
           smallText && 'max-mobile:text-[14.75px]',
@@ -18,7 +20,7 @@ defineProps<{
       "
     >
       {{ title }}
-    </h2>
+    </label>
     <div>
       <slot />
     </div>

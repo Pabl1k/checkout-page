@@ -66,17 +66,19 @@ watch(
   <section
     class="max-mobile:mt-[15px] mt-5 max-mobile:p-2 max-mobile:pb-0 pt-6 mobile:pb-4 px-6 bg-card-background border border-card-section-border max-mobile:rounded-[3.69px] rounded-sm"
   >
-    <FieldWrapper title="Card Holder Name" smallText>
+    <FieldWrapper label-id="cardHolder" title="Card Holder Name" smallText>
       <Input
+        id="cardHolder"
         :value="formCardState.cardHolder"
         :error-message="formErrors.cardHolder"
         :onChange="(val) => onChange('cardHolder', val)"
       />
     </FieldWrapper>
 
-    <FieldWrapper title="Card Number" smallText>
+    <FieldWrapper label-id="cardNumber" title="Card Number" smallText>
       <Input
         ref="cardNumberRef"
+        id="cardNumber"
         :value="formCardState.cardNumber"
         :error-message="formErrors.cardNumber"
         :onChange="(val) => onChange('cardNumber', val)"
@@ -92,17 +94,19 @@ watch(
     </FieldWrapper>
 
     <div class="flex gap-2">
-      <FieldWrapper title="Expiration date" smallText>
+      <FieldWrapper label-id="expirationDate" title="Expiration date" smallText>
         <Input
           ref="expirationDateRef"
+          id="expirationDate"
           :value="formCardState.expirationDate"
           :error-message="formErrors.expirationDate"
           placeholder="MM/YY"
           :onChange="(val) => onChange('expirationDate', val)"
         />
       </FieldWrapper>
-      <FieldWrapper title="CVV" smallText>
+      <FieldWrapper label-id="cvv" title="CVV" smallText>
         <Input
+          id="cvv"
           :value="formCardState.cvv"
           :error-message="formErrors.cvv"
           :onChange="(val) => onChange('cvv', val)"

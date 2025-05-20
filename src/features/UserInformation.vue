@@ -39,8 +39,9 @@ const birthDateFields: Field<UserBirthDateFieldKeys>[] = [
 <template>
   <section>
     <div v-for="{ key, title } in userInfoInputs" :key="key">
-      <FieldWrapper :title="title">
+      <FieldWrapper :label-id="key" :title="title">
         <Input
+          :id="key"
           :value="formInfoState[key as UserInfoInput]"
           :error-message="formErrors[key]"
           :onChange="(val) => onChange(key, val)"
@@ -53,7 +54,7 @@ const birthDateFields: Field<UserBirthDateFieldKeys>[] = [
       </FieldWrapper>
     </div>
 
-    <FieldWrapper title="Birth date">
+    <FieldWrapper label-id="birthDate" title="Birth date">
       <div class="flex max-mobile:gap-[5px] gap-[10px]">
         <div
           v-for="{ key, title } in birthDateFields"
@@ -71,7 +72,7 @@ const birthDateFields: Field<UserBirthDateFieldKeys>[] = [
       <ErrorContainer :errorMessage="formErrors.birthDate" />
     </FieldWrapper>
 
-    <FieldWrapper title="Gender">
+    <FieldWrapper label-id="gender" title="Gender">
       <div class="flex gap-3">
         <RadioButton
           label="Female"

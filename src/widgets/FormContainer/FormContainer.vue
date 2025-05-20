@@ -11,7 +11,7 @@ const { formState, formErrors, handleChange, holderNameAutoFill, handleSubmit } 
   <main
     class="bg-form-background flex flex-col items-center max-mobile:py-[22px] max-mobile:px-[20px] py-[34px] px-[24px] gap-[34px] rounded-[4.59px] border border-form-border"
   >
-    <div class="max-mobile:w-[250px] w-[328px]">
+    <form class="max-mobile:w-[250px] w-[328px]" @submit.prevent="handleSubmit">
       <h1 class="text-form-title font-bold text-xl text-center mb-[34px] max-mobile:mb-[14px]">
         Get your Car Insurance for $9.99
       </h1>
@@ -30,8 +30,8 @@ const { formState, formErrors, handleChange, holderNameAutoFill, handleSubmit } 
       />
 
       <div class="max-mobile:mt-[14px] mt-[34px]">
-        <SubmitButton @click="handleSubmit">continue</SubmitButton>
+        <SubmitButton type="submit">continue</SubmitButton>
       </div>
-    </div>
+    </form>
   </main>
 </template>
