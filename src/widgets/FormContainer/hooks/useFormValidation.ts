@@ -1,6 +1,6 @@
+import { reactive } from 'vue';
 import useVuelidate from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
-import { reactive } from 'vue';
 import type { FormErrorKeys, FormState } from '../../../shared/types/form';
 import { initialFormErrors } from '../model/initialState.ts';
 import { type ValidatorName, validators } from '../model/validators.ts';
