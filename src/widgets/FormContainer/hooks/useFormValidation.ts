@@ -3,17 +3,15 @@ import { required } from '@vuelidate/validators';
 import { reactive } from 'vue';
 import type { FormErrorKeys, FormState } from '../../../shared/types/form';
 import { initialFormErrors } from '../model/initialState.ts';
-import {
-  birthDateValidator,
-  emailValidator,
-  expirationDateValidator,
-  fullNameValidator
-} from '../model/validators.ts';
+import { type ValidatorName, validators } from '../model/validators.ts';
 
 const REQUIRED_FIELD_ERROR_TEXT = 'Field is required';
 
 export const useFormValidation = (state: FormState) => {
   const formErrors = reactive<Record<FormErrorKeys, string>>({ ...initialFormErrors });
+
+  const { fullNameValidator, emailValidator, birthDateValidator, expirationDateValidator } =
+    validators;
 
   const rules = {
     fullName: { required, fullNameValidator },
@@ -35,7 +33,7 @@ export const useFormValidation = (state: FormState) => {
     Object.assign(formErrors, initialFormErrors);
 
     const validateField = (fieldName: FormErrorKeys, withValidator = false) => {
-      const validator: `${FormErrorKeys}Validator` = `${fieldName}Validator`;
+      const validator: ValidatorName = `${fieldName}Validator`;
 
       if (!v$.value[fieldName].$valid) {
         if (v$.value[fieldName].required.$invalid) {

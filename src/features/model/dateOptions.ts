@@ -1,4 +1,5 @@
 import type { UserBirthDateFieldKeys } from '../../shared/types/userInfo.ts';
+import { getMonthsList } from '../../shared/utils/date.ts';
 
 const getYearOptions = () => {
   const start = 1900;
@@ -12,15 +13,10 @@ const getYearOptions = () => {
   return years;
 };
 
-const getMonthOptions = () =>
-  Array.from({ length: 12 }, (_, i) =>
-    new Intl.DateTimeFormat('en-US', { month: 'long' }).format(new Date(2000, i))
-  );
-
 const getDayOptions = () => Array.from({ length: 31 }, (_, i) => String(i + 1));
 
 export const birthDateOptions: Record<UserBirthDateFieldKeys, string[]> = {
-  month: getMonthOptions(),
+  month: getMonthsList(),
   day: getDayOptions(),
   year: getYearOptions()
 };
