@@ -5,5 +5,5 @@ import viteCompression from 'vite-plugin-compression';
 
 export default defineConfig({
   plugins: [vue(), tailwindcss(), viteCompression()],
-  base: './'
+  base: '/checkout-page'
 });
