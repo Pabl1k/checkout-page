@@ -1,5 +1,5 @@
 import { onMounted, reactive } from 'vue';
-import type { FormState } from '../../../shared/types/form';
+import type { FormState, InputFields } from '../../../shared/types/form';
 import type { BirthDate } from '../../../shared/types/userInfo';
 import { initialFormState } from '../model/initialState.ts';
 import { useFormValidation } from './useFormValidation.ts';
@@ -42,7 +42,12 @@ export const useForm = () => {
     }
   };
 
+  const trimValues = (fieldName: InputFields) => {
+    formState[fieldName] = formState[fieldName].trim();
+  };
+
   const holderNameAutoFill = () => {
+    trimValues('fullName');
     formState.cardHolder = formState.fullName;
   };
 
@@ -68,6 +73,7 @@ export const useForm = () => {
   return {
     formState,
     formErrors,
+    trimValues,
     handleChange,
     holderNameAutoFill,
     handleSubmit

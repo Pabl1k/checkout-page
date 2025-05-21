@@ -2,13 +2,14 @@
 import { ref, onMounted, watch, type ComponentPublicInstance } from 'vue';
 import Cleave from 'cleave.js';
 import type { CardInfoState } from '../shared/types/cardInfo.ts';
-import type { FormErrorKeys, FormState } from '../shared/types/form.ts';
+import type { FormErrorKeys, FormState, InputFields } from '../shared/types/form.ts';
 import FieldWrapper from '../shared/ui/FieldWrapper.vue';
 import Input from '../shared/ui/Input.vue';
 
 const props = defineProps<{
   formCardState: CardInfoState;
   formErrors: Record<FormErrorKeys, string>;
+  onInputBlur: (fieldName: InputFields) => void;
   onChange: <K extends keyof FormState>(key: K, value: FormState[K]) => void;
 }>();
 
@@ -72,6 +73,7 @@ watch(
         :value="formCardState.cardHolder"
         :error-message="formErrors.cardHolder"
         card-section
+        :on-blur="() => onInputBlur('cardHolder')"
         :onChange="(val) => onChange('cardHolder', val)"
       />
     </FieldWrapper>
@@ -116,6 +118,7 @@ watch(
           :value="formCardState.cvv"
           :error-message="formErrors.cvv"
           card-section
+          :on-blur="() => onInputBlur('cvv')"
           :onChange="(val) => onChange('cvv', val)"
         />
       </FieldWrapper>

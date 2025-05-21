@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { FormErrorKeys, FormState } from '../shared/types/form.ts';
+import type { FormErrorKeys, FormState, InputFields } from '../shared/types/form.ts';
 import type {
   UserBirthDateFieldKeys,
   UserInfoInput,
@@ -16,6 +16,7 @@ defineProps<{
   formInfoState: UserInfoState;
   formErrors: Record<FormErrorKeys, string>;
   onFullNameBlur: () => void;
+  onInputBlur: (fieldName: InputFields) => void;
   onChange: <K extends keyof FormState>(key: K, value: FormState[K]) => void;
 }>();
 
@@ -46,7 +47,7 @@ const birthDateFields: Field<UserBirthDateFieldKeys>[] = [
           :value="formInfoState[key as UserInfoInput]"
           :error-message="formErrors[key]"
           :onChange="(val) => onChange(key, val)"
-          :onBlur="key === 'fullName' ? onFullNameBlur : undefined"
+          :onBlur="key === 'fullName' ? onFullNameBlur : () => onInputBlur(key)"
         >
           <template v-if="key === 'zip'" #prefix>
             <img src="/assets/pin.svg" alt="pin" class="size-[18px] mr-1" />
